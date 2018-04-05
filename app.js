@@ -12,7 +12,9 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 const index = require('./routes/index');
+const offers = require('./routes/offers.routes');
 const users = require('./routes/users.routes');
+
 
 const app = express();
 
@@ -30,6 +32,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/offers', offers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,6 +42,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({ message: error.message || '' });
