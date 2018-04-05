@@ -9,8 +9,7 @@ const offerSchema = new mongoose.Schema({
     require: [true, 'The company name is required']
   },
   logo: {
-    type: String,
-    require: [true, 'A company logo is required']
+    type: String
   },
   description: {
     type: String
@@ -24,3 +23,6 @@ const offerSchema = new mongoose.Schema({
     ref: 'Owner'
   }
 });
+
+const Offer = mongoose.model('Offer', offerSchema);
+module.exports = Offer;
