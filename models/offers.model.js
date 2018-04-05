@@ -18,5 +18,9 @@ const offerSchema = new mongoose.Schema({
   salary: {
     type: Number,
     require: [true, 'The salary is required']
+  },
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Owner'
   }
 });
