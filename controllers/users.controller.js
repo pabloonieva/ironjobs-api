@@ -56,6 +56,7 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.list = (req, res, next) => {
+  
   User.find()
   .then(user => res.json(user))
   .catch(error => next(error));   
