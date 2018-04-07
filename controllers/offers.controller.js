@@ -3,9 +3,28 @@ const Offer = require('../models/offers.model');
 const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
-   Offer.find()
-    .then(offer => res.json(offer))
-    .catch(error => next(error));
+  if(req.user.role === 'COMPANY'){
+    Offer.find({ ownerId: req.user._id })
+     .then(offers => res.json(offers))
+     .catch(error => {
+       if (error instanceof mongoose.Error.ValidationError) {
+         next(new ApiError(error.errors));
+       } else {
+         next(new ApiError(error.message, 500));
+       }
+     });
+  }
+  if(req.user.role === 'Ironhacker'){
+    Offer.find()
+     .then(offers => res.json(offers))
+     .catch(error => {
+       if (error instanceof mongoose.Error.ValidationError) {
+         next(new ApiError(error.errors));
+       } else {
+         next(new ApiError(error.message, 500));
+       }
+     });
+  }
 };
 
 module.exports.create = (req, res, next) => {
@@ -31,7 +50,7 @@ module.exports.edit = (req, res, next) => {
     if(offer){
       res.json(offer);
     }else{
-      next(new ApiError('phone not found', 404));
+      next(new ApiError('Offer not found', 404));
     }
   }).catch(error => {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -44,12 +63,12 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   const id = req.params.id;
-  Offer.findByIdandRemove(id)
+  Offer.findByIdAndRemove(id)
   .then(offer => {
     if(offer){
       res.status(204).json();
     }else{
-      next(new ApiError(`Phone not found`, 404));
+      next(new ApiError(`Offer not found`, 404));
     }
   }).catch(error => next(error)); //por qué aquí no ponemos ApiError?
 
