@@ -23,35 +23,35 @@ module.exports.create = (req, res, next) => {
       }
     });
 };
-//
-// module.exports.editMyOffers = (req, res, next) => {
-//   const id = req.params.id;
-//   Offer.findByIdAndUpdate(id, {$set: req.body}, {new: true})
-//   .then(offer => {
-//     if(offer){
-//       res.json(offer);
-//     }else{
-//       next(new ApiError('phone not found', 404));
-//     }
-//   }).catch(error => {
-//     if (error instanceof mongoose.Error.ValidationError) {
-//       next(new ApiError(error.message, 400, error.errors));
-//     } else {
-//       next(new ApiError(error.message, 500));
-//     }
-//   });
-// };
-//
-// module.exports.deleteMyOffers = (req, res, next) => {
-//   const id = req.params.id;
-//   Offer.findByIdandRemove(id)
-//   .then(offer => {
-//     if(offer){
-//       res.status(204).json();
-//     }else{
-//       next(new ApiError(`Phone not found`, 404));
-//     }
-//   }).catch(error => next(error)); //por qué aquí no ponemos ApiError?
-//
-//
-// };
+
+module.exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  Offer.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+  .then(offer => {
+    if(offer){
+      res.json(offer);
+    }else{
+      next(new ApiError('phone not found', 404));
+    }
+  }).catch(error => {
+    if (error instanceof mongoose.Error.ValidationError) {
+      next(new ApiError(error.message, 400, error.errors));
+    } else {
+      next(new ApiError(error.message, 500));
+    }
+  });
+};
+
+module.exports.delete = (req, res, next) => {
+  const id = req.params.id;
+  Offer.findByIdandRemove(id)
+  .then(offer => {
+    if(offer){
+      res.status(204).json();
+    }else{
+      next(new ApiError(`Phone not found`, 404));
+    }
+  }).catch(error => next(error)); //por qué aquí no ponemos ApiError?
+
+
+};

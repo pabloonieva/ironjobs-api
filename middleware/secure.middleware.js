@@ -9,18 +9,10 @@ module.exports.checkAuthentication = (req, res, next) => {
     }
 };
 
-// module.exports.checkAdmin = (req, res, next) => {
-//   if(req.user.role === 'admin'){
-//     next();
-//   }else{
-//     next(ApiError('Forbidden', 403));
-//   }
-// };
-
-// module.exports.checkUserRole = (req, res, next, role) => {
-//   if(req.user.role === role){
-//     next();
-//   }else{
-//     next(ApiError('Forbidden', 403));
-//   }
-// };
+module.exports.checkUserRole = (req, res, next, role) => {
+  if(req.user.role === role){
+    next();
+  }else{
+    next(ApiError('Forbidden', 403));
+  }
+};
