@@ -14,7 +14,7 @@ require('./configs/passport.config').setup(passport);
 
 const offers = require('./routes/offers.routes');
 const users = require('./routes/users.routes');
-
+const sessionRoutes = require('./routes/session.routes');
 
 const app = express();
 
@@ -27,13 +27,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'Super Secret',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    maxAge: 2419200000
+  }
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 app.use('/users', users);
 app.use('/offers', offers);
-
+app.use('/session', sessionRoutes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
