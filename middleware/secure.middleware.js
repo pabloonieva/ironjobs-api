@@ -1,0 +1,18 @@
+const mongoose = require('mongoose');
+const ApiError = requite('../model/api-error.model.js');
+
+module.exports.checkAuthentication = (req, res, next) => {
+    if(req.isAuthenticated()){
+      next();
+    }else{
+      next(ApiError('Forbidden', 403));
+    }
+};
+
+module.exports.checkUserRole = (req, res, next, role) => {
+  if(req.user.role === role){
+    next();
+  }else{
+    next(ApiError('Forbidden', 403));
+  }
+};
