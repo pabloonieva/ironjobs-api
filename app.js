@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
-const index = require('./routes/index');
+
 const offers = require('./routes/offers.routes');
 const users = require('./routes/users.routes');
 
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', index);
+
 app.use('/users', users);
 app.use('/offers', offers);
 
