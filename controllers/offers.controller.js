@@ -31,7 +31,7 @@ module.exports.edit = (req, res, next) => {
     if(offer){
       res.json(offer);
     }else{
-      next(new ApiError('phone not found', 404));
+      next(new ApiError('Offer not found', 404));
     }
   }).catch(error => {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -44,12 +44,12 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   const id = req.params.id;
-  Offer.findByIdandRemove(id)
+  Offer.findByIdAndRemove(id)
   .then(offer => {
     if(offer){
       res.status(204).json();
     }else{
-      next(new ApiError(`Phone not found`, 404));
+      next(new ApiError(`Offer not found`, 404));
     }
   }).catch(error => next(error)); //por qué aquí no ponemos ApiError?
 
