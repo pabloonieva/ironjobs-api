@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ApiError = requite('../model/api-error.model.js');
+const ApiError = require('../models/api-error.model.js');
 
 module.exports.checkAuthentication = (req, res, next) => {
     if(req.isAuthenticated()){

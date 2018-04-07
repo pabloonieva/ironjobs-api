@@ -30,7 +30,7 @@ module.exports.delete = (req, res, next) => {
   User.findByIdAndRemove(id)
   .then(user => {
     if(user){
-      res.status(204).json('User deleted');
+      res.status(204).json({ message: 'User deleted' });
     }else{
       next(new ApiError(`User not found`, 404));
     }

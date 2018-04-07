@@ -14,7 +14,7 @@ require('./configs/passport.config').setup(passport);
 
 const offers = require('./routes/offers.routes');
 const users = require('./routes/users.routes');
-
+const sessionRoutes = require('./routes/session.routes');
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(passport.session());
 
 app.use('/users', users);
 app.use('/offers', offers);
-
+app.use('/session', sessionRoutes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
