@@ -8,6 +8,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const corsConfig = require('./configs/cors.config');
 
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
