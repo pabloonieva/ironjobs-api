@@ -10,4 +10,4 @@ router.delete('/delete/:id', offersController.delete);
 
 module.exports = router;
 
-//secureMiddleware.checkAuthentication
+// secureMiddleware.checkAuthentication
