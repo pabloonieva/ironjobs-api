@@ -2,9 +2,9 @@ const passport = require('passport');
 const ApiError = require('../models/api-error.model');
 
 module.exports.create = (req, res, next) => {
-  const email= req.body.userEmail;
+  const userEmail= req.body.userEmail;
   const password = req.body.password;
-  if (!email || !password) {
+  if (!userEmail || !password) {
     next(new ApiError('Email and password are required', 400));
   } else {
     passport.authenticate('local-auth', (err, user, message) => {

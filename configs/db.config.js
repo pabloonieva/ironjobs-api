@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const DB_NAME = 'ironjobs';
 const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/${DB_NAME}`;
@@ -5,7 +6,7 @@ const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/${DB_NAME}`;
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.info(`Connect to db ${DB_NAME}`);
+        console.info(`Connect to db ${MONGODB_URI}`);
     })
     .catch(error => {
         console.error(`Unable to connect to db ${DB_NAME}: ${error}`);
