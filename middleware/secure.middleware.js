@@ -31,3 +31,11 @@ module.exports.isIronhacker = (req, res, next, role) => {
     next(new ApiError('Forbidden', 403));
   }
 };
+
+module.exports.isCompanyOrAdmin = (req, res, next, role) => {
+  if(req.user.role === 'COMPANY' || req.user.role === 'ADMIN'){
+    next();
+  }else{
+    next(new ApiError('Forbidden', 403));
+  }
+};
