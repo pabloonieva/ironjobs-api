@@ -3,18 +3,18 @@ const Offer = require('../models/offers.model');
 const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
-  // if(true || req.user.role === 'COMPANY'){
-  //   Offer.find({ ownerId: req.user._id })
-  //    .then(offers => res.json(offers))
-  //    .catch(error => {
-  //      if (error instanceof mongoose.Error.ValidationError) {
-  //        next(new ApiError(error.errors));
-  //      } else {
-  //        next(new ApiError(error.message, 500));
-  //      }
-  //    });
-  // }
-  if(true || req.user.role === 'Ironhacker'){
+  if(req.user.role === 'COMPANY'){
+    Offer.find({ ownerId: req.user._id })
+     .then(offers => res.json(offers))
+     .catch(error => {
+       if (error instanceof mongoose.Error.ValidationError) {
+         next(new ApiError(error.errors));
+       } else {
+         next(new ApiError(error.message, 500));
+       }
+     });
+  }
+  if(req.user.role === 'Ironhacker'||req.user.role === 'ADMIN'){
     Offer.find()
      .then(offers => res.json(offers))
      .catch(error => {
@@ -71,6 +71,4 @@ module.exports.delete = (req, res, next) => {
       next(new ApiError(`Offer not found`, 404));
     }
   }).catch(error => next(error)); //por qué aquí no ponemos ApiError?
-
-
 };
