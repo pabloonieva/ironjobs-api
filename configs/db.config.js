@@ -10,4 +10,5 @@ mongoose.connect(MONGODB_URI)
     })
     .catch(error => {
         console.error(`Unable to connect to db ${DB_NAME}: ${error}`);
-    })
+    });
+    
