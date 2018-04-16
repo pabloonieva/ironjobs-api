@@ -31,7 +31,6 @@ module.exports.create = (req, res, next) => {
   const offer = new Offer(req.body);
   offer.save()
     .then(() => {
-      console.log(offer);
       return res.json(offer);
     })
     .catch(error => {
