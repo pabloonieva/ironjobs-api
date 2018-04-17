@@ -20,11 +20,23 @@ module.exports.apply = (req, res, next) => {
   });
 };
 
-module.exports.listMyApplications = (req, res, next) => {
+module.exports.myApplications = (req, res, next) => {
+  const id = req.user._id;
+  Apply.findAll({ applyUserId: id })
+    .populate('offer')
+    .then(function (err, apply) {
+      if (err) return handleError(err);
+        console.log('You applied all this offers: ', apply.offer.title);
+    });
+  };
 
-};
 
-
-module.exports.showApplications = (req, res, next) => {
-
+module.exports.myIronhackers = (req, res, next) => {
+  // const id = req.params.id;
+  // Apply.findAll({ applyOfferId: id })
+  //   .populate('')
+  //   .then(function (err, apply) {
+  //     if (err) return handleError(err);
+  //       console.log(offer.title);
+  //   });
 };
