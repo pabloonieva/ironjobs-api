@@ -32,11 +32,11 @@ module.exports.myApplications = (req, res, next) => {
 
 
 module.exports.myIronhackers = (req, res, next) => {
-  // const id = req.params.id;
-  // Apply.findAll({ applyOfferId: id })
-  //   .populate('')
-  //   .then(function (err, apply) {
-  //     if (err) return handleError(err);
-  //       console.log(offer.title);
-  //   });
+  const id = req.params.id;
+  Apply.findAll({ applyOfferId: id })
+    .populate('')
+    .then(function (err, apply) {
+      if (err) return handleError(err);
+        console.log(offer.title);
+    });
 };

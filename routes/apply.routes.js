@@ -3,7 +3,7 @@ const router = express.Router();
 const applyController = require('../controllers/apply.controller');
 const secureMiddleware = require('../middleware/secure.middleware');
 
-router.get('/myapplications/:id', secureMiddleware.isIronhacker, applyController.myApplications);
+router.get('/myapplications', secureMiddleware.isIronhacker, applyController.myApplications);
 router.get('/myironhackers/:id', secureMiddleware.isCompany, applyController.myIronhackers);
 router.post('/new/:id', applyController.apply);
 

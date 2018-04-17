@@ -13,8 +13,18 @@ module.exports.list = (req, res, next) => {
          next(new ApiError(error.message, 500));
        }
      });
-  }
-  if(req.user.role === 'Ironhacker'||req.user.role === 'ADMIN'){
+  }else if(req.user.role === 'ADMIN'){
+    console.log("entra");
+    Offer.find()
+     .then(offers => res.json(offers))
+     .catch(error => {
+       if (error instanceof mongoose.Error.ValidationError) {
+         next(new ApiError(error.errors));
+       } else {
+         next(new ApiError(error.message, 500));
+       }
+     });
+  } else if(req.user.role === 'IRONHACKER'){
     Offer.find()
      .then(offers => res.json(offers))
      .catch(error => {
