@@ -17,7 +17,7 @@ module.exports.create = (req, res, next) => {
           if (err) {
             next(err);
           } else {
-            res.json({ message: 'User signed in', user } );
+            res.json(user);
           }
         });
       }
