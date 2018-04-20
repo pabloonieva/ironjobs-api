@@ -4,7 +4,7 @@ const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
   if(req.user.role === 'COMPANY'){
-    Offer.find({ ownerId: req.user._id })
+    Offer.find()
      .then(offers => res.json(offers))
      .catch(error => {
        if (error instanceof mongoose.Error.ValidationError) {
